@@ -17,6 +17,8 @@
 
 #define CONFIG_BOARD_COMMON
 
+#define CONFIG_SYS_TEXT_BASE           0x42400000
+
 #define CONFIG_DEFAULT_CONSOLE		"console=ttySAC1,115200n8\0"
 
 #endif	/* __CONFIG_SNOW_H */
