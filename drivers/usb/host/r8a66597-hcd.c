@@ -826,7 +826,7 @@ int submit_int_msg(struct usb_device *dev, unsigned long pipe, void *buffer,
 {
 	/* no implement */
 	R8A66597_DPRINT("%s\n", __func__);
-	return 0;
+	return -ENOTSUPP;
 }
 
 int usb_lowlevel_init(int index, enum usb_init_type init, void **controller)
