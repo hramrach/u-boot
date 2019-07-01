@@ -339,7 +339,7 @@ static inline void usb_kbd_poll_for_event(struct usb_device *dev)
 	struct usb_kbd_pdata *data = dev->privptr;
 
 	/* Submit a interrupt transfer request */
-	if (!usb_int_msg(dev, data->intpipe, &data->new[0],
+	if (!usb_int_msg_nonblock(dev, data->intpipe, &data->new[0],
 				  data->intpktsize, data->intinterval))
 		usb_kbd_irq_worker(dev);
 #elif defined(CONFIG_SYS_USB_EVENT_POLL_VIA_CONTROL_EP) || \
