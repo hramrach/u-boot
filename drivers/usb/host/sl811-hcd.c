@@ -388,7 +388,7 @@ int submit_int_msg(struct usb_device *dev, unsigned long pipe, void *buffer,
 {
 	PDEBUG(0, "dev = %p pipe = %#lx buf = %p size = %d int = %d\n", dev, pipe,
 	       buffer, len, interval);
-	return -1;
+	return -ENOTSUPP;
 }
 
 /*
