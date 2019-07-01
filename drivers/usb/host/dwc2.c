@@ -1123,7 +1123,7 @@ int _submit_int_msg(struct dwc2_priv *priv, struct usb_device *dev,
 			return -ETIMEDOUT;
 		}
 		ret = _submit_bulk_msg(priv, dev, pipe, buffer, len);
-		if (ret != -EAGAIN)
+		if ((ret != -EAGAIN) || nonblock)
 			return ret;
 	}
 }
@@ -1294,13 +1294,13 @@ static int dwc2_submit_bulk_msg(struct udevice *dev, struct usb_device *udev,
 
 static int dwc2_submit_int_msg(struct udevice *dev, struct usb_device *udev,
 			       unsigned long pipe, void *buffer, int length,
-			       int interval)
+			       int interval, bool nonblock)
 {
 	struct dwc2_priv *priv = dev_get_priv(dev);
 
 	debug("%s: dev='%s', udev=%p\n", __func__, dev->name, udev);
 
-	return _submit_int_msg(priv, udev, pipe, buffer, length, interval);
+	return _submit_int_msg(priv, udev, pipe, buffer, length, interval, nonblock);
 }
 
 static int dwc2_usb_ofdata_to_platdata(struct udevice *dev)
