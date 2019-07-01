@@ -1108,7 +1108,8 @@ static int _submit_control_msg(struct dwc2_priv *priv, struct usb_device *dev,
 }
 
 int _submit_int_msg(struct dwc2_priv *priv, struct usb_device *dev,
-		    unsigned long pipe, void *buffer, int len, int interval)
+		    unsigned long pipe, void *buffer, int len, int interval,
+		    bool nonblock)
 {
 	unsigned long timeout;
 	int ret;
@@ -1236,9 +1237,10 @@ int submit_bulk_msg(struct usb_device *dev, unsigned long pipe, void *buffer,
 }
 
 int submit_int_msg(struct usb_device *dev, unsigned long pipe, void *buffer,
-		   int len, int interval)
+		   int len, int interval, bool nonblock)
 {
-	return _submit_int_msg(&local, dev, pipe, buffer, len, interval);
+	return _submit_int_msg(&local, dev, pipe, buffer, len, interval,
+			       nonblock);
 }
 
 /* U-Boot USB control interface */
